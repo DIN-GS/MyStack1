@@ -1,38 +1,34 @@
 package org.example;
 
-import junit.framework.TestCase;
 import org.example.Exceptions.DoesNotExist;
 import org.example.Exceptions.StackEmpty;
 import org.example.Exceptions.StackOverflow;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.net.InetSocketAddress;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import java.util.Optional;
 
-import static org.junit.Assert.assertArrayEquals;
 
-public class MyStackTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+public class MyStackTest  {
 
     private MyStack mStack;
-    /*@BeforeClass
+    @BeforeAll
     public void initialize(){
         mStack = new MyStack(4);
         mStack.addElement(79);
         mStack.addElement(59);
         mStack.addElement(35);
         mStack.addElement(24);
-    }*/
+    }
 
     @Test
     public void testAddElement() {
-        mStack = new MyStack(4);
-        mStack.addElement(79);
-        mStack.addElement(59);
-        mStack.addElement(35);
-        mStack.addElement(24);
+
         int[] mas = new int[4];
         for (int i = 0; i < 4; i ++){
             mas[i] = mStack.readTop();
@@ -43,11 +39,7 @@ public class MyStackTest extends TestCase {
     }
     @Test
     public void testAddElementException(){
-        mStack = new MyStack(4);
-        mStack.addElement(79);
-        mStack.addElement(59);
-        mStack.addElement(35);
-        mStack.addElement(24);
+
         try {
             mStack.addElement(34);
         }catch (StackOverflow stackOverflow){
@@ -59,11 +51,7 @@ public class MyStackTest extends TestCase {
     @Test
 
     public void testDeleteElement() {
-        MyStack mStack = new MyStack(10);
-        mStack.addElement(79);
-        mStack.addElement(59);
-        mStack.addElement(35);
-        mStack.addElement(24);
+
         mStack.deleteElement();
 
         assertEquals(new Integer(35), mStack.readTop() );
@@ -82,11 +70,7 @@ public class MyStackTest extends TestCase {
 
     @Test
     public void testGetElement() {
-        MyStack mStack = new MyStack(10);
-        mStack.addElement(79);
-        mStack.addElement(59);
-        mStack.addElement(35);
-        mStack.addElement(24);
+
         mStack.deleteElement();
         Optional<Integer> optional = mStack.getElement(0);
         Integer number = optional.get();
@@ -95,11 +79,7 @@ public class MyStackTest extends TestCase {
 
     @Test
     public void testGetElementException(){
-        MyStack mStack = new MyStack(10);
-        mStack.addElement(79);
-        mStack.addElement(59);
-        mStack.addElement(35);
-        mStack.addElement(24);
+
         mStack.deleteElement();
 
         try {
