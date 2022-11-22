@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.net.InetSocketAddress;
+import java.util.Optional;
+
 import static org.junit.Assert.assertArrayEquals;
 
 public class MyStackTest extends TestCase {
@@ -63,7 +66,7 @@ public class MyStackTest extends TestCase {
         mStack.addElement(24);
         mStack.deleteElement();
 
-        assertEquals(mStack.readTop(), 35 );
+        assertEquals(new Integer(35), mStack.readTop() );
     }
 
     @Test
@@ -85,8 +88,9 @@ public class MyStackTest extends TestCase {
         mStack.addElement(35);
         mStack.addElement(24);
         mStack.deleteElement();
-
-        assertEquals(79, mStack.getElement(0) );
+        Optional<Integer> optional = mStack.getElement(0);
+        Integer number = optional.get();
+        assertEquals(new Integer(79), number);
     }
 
     @Test

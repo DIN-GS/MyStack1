@@ -4,29 +4,31 @@ import org.example.Exceptions.DoesNotExist;
 import org.example.Exceptions.StackEmpty;
 import org.example.Exceptions.StackOverflow;
 
+import java.util.Optional;
+
 public class MyStack implements Stackable{
     private int mSize; //mSize - максимальный размер
-    private int[] stackArray;
+    private Integer[] stackArray;
     private int top;
 
     public MyStack(int m) {
         this.mSize = m;
-        stackArray = new int[mSize];
+        stackArray = new Integer[mSize];
         top = -1;
     }
 
     @Override
-    public void addElement(int element) throws StackOverflow{
+    public void addElement(Integer element) throws StackOverflow{
         if (top+1 == mSize) throw new StackOverflow();
         stackArray[++top] = element;
     }
     @Override
-    public int deleteElement() throws StackEmpty{
+    public Integer deleteElement() throws StackEmpty{
         if (top == -1) throw new StackEmpty();
         return stackArray[top--];
     }
     @Override
-    public int readTop() throws StackEmpty{
+    public Integer readTop() throws StackEmpty{
         if (top == -1) throw new StackEmpty();
         return stackArray[top];
     }
@@ -40,11 +42,16 @@ public class MyStack implements Stackable{
     }
 
     @Override
-    public int getElement(int index) throws DoesNotExist{
+    public Optional<Integer> getElement(int index){
+
+        return Optional.of(getElementOptional(index));
+    }
+
+    public Integer getElementOptional(int index) {
         int l = top;
         for (int i = l; i>=0; i--){
-            if (i == index) return stackArray[i];
+            if (i == index) l = i;
         }
-        throw new DoesNotExist();
+        return stackArray[l];
     }
 }

@@ -4,14 +4,14 @@ import org.example.Exceptions.DoesNotExist;
 import org.example.Exceptions.StackEmpty;
 import org.example.Exceptions.StackOverflow;
 
-import java.util.Stack;
+import java.util.Optional;
 
 public interface Stackable {
-    void addElement(int element) throws StackOverflow;
+    void addElement(Integer element) throws StackOverflow;
 
-    int deleteElement() throws StackEmpty;
-    int readTop() throws StackEmpty;
-    int getElement(int index) throws DoesNotExist;
+    Integer deleteElement() throws StackEmpty;
+    Integer readTop() throws StackEmpty;
+    Optional<Integer> getElement(int index);
 
     boolean isEmpty();
 
